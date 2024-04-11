@@ -1,0 +1,33 @@
+.task {
+  background: #fff;
+  color: #000;
+  min-height: 6rem;
+  border-radius: var(--BORDER-RADIUS);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bottom-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.status {
+  font-size: 1rem;
+  padding: 0.3rem;
+  border-radius: var(--BORDER-RADIUS);
+}
+
+.TODO {
+  background: var(--COLOR-GRAY-LIGHT);
+}
+
+.IN_PROGRESS {
+  background: var(--COLOR-INPROGRESS);
+}
+
+.DONE {
+  background: var(--COLOR-DONE);
+}

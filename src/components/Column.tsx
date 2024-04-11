@@ -1,13 +1,17 @@
 import "./Column.css";
-
-type Status = "TODO" | "IN_PROGRESS" | "DONE";
+import Task, { Status } from "./Task";
 
 interface Props {
   status: Status;
 }
 
 const Column = ({ status }: Props) => {
-  return <div className="column">{status}</div>;
+  return (
+    <div className="column">
+      <p>{status}</p>
+      <Task task={{ title: "task1" }} />
+    </div>
+  );
 };
 
 export default Column;
