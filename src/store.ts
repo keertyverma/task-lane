@@ -1,6 +1,7 @@
 import { mountStoreDevtool } from "simple-zustand-devtools";
 import { v4 as uuid } from "uuid";
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export type Status = "TODO" | "IN_PROGRESS" | "DONE";
 
@@ -20,33 +21,38 @@ interface TaskStore {
   moveTask: (id: string | null, status: Status) => void;
 }
 
-const useTaskStore = create<TaskStore>((set) => ({
-  tasks: [],
-  draggedTaskId: null,
-  addTask: (task) =>
-    set((state) => ({
-      tasks: [
-        {
-          id: uuid(),
-          title: task.title,
-          description: task.description,
-          status: task.status,
-        },
-        ...state.tasks,
-      ],
-    })),
-  deleteTask: (id) =>
-    set((state) => ({
-      tasks: state.tasks.filter((task) => task.id !== id),
-    })),
-  setDraggedTask: (id) => set({ draggedTaskId: id }),
-  moveTask: (id, status) =>
-    set((state) => ({
-      tasks: state.tasks.map((task) =>
-        task.id === id ? { ...task, status } : task
-      ),
-    })),
-}));
+const useTaskStore = create<TaskStore>(
+  persist(
+    (set) => ({
+      tasks: [],
+      draggedTaskId: null,
+      addTask: (task) =>
+        set((state) => ({
+          tasks: [
+            {
+              id: uuid(),
+              title: task.title,
+              description: task.description,
+              status: task.status,
+            },
+            ...state.tasks,
+          ],
+        })),
+      deleteTask: (id) =>
+        set((state) => ({
+          tasks: state.tasks.filter((task) => task.id !== id),
+        })),
+      setDraggedTask: (id) => set({ draggedTaskId: id }),
+      moveTask: (id, status) =>
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id ? { ...task, status } : task
+          ),
+        })),
+    }),
+    { name: "task store" }
+  )
+);
 
 if (process.env.NODE_ENV === "development") {
   mountStoreDevtool("Task Store", useTaskStore);
