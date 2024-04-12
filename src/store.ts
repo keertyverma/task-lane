@@ -4,7 +4,7 @@ import { create } from "zustand";
 export type Status = "TODO" | "IN_PROGRESS" | "DONE";
 
 export interface ITask {
-  id?: string;
+  id: string;
   title: string;
   description?: string;
   status: Status;
@@ -12,13 +12,16 @@ export interface ITask {
 
 interface TaskStore {
   tasks: ITask[];
+  draggedTaskId: string | null;
   addTask: (task: ITask) => void;
-  deleteTask: (taskId: string) => void;
+  deleteTask: (id: string) => void;
+  setDraggedTask: (id: string | null) => void;
 }
 
 const useTaskStore = create<TaskStore>((set) => ({
   tasks: [],
-  addTask: (task: ITask) =>
+  draggedTaskId: null,
+  addTask: (task) =>
     set((state) => ({
       tasks: [
         {
@@ -30,10 +33,11 @@ const useTaskStore = create<TaskStore>((set) => ({
         ...state.tasks,
       ],
     })),
-  deleteTask: (taskId: string) =>
+  deleteTask: (id) =>
     set((state) => ({
-      tasks: state.tasks.filter((task) => task.id !== taskId),
+      tasks: state.tasks.filter((task) => task.id !== id),
     })),
+  setDraggedTask: (id) => set({ draggedTaskId: id }),
 }));
 
 export default useTaskStore;

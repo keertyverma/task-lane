@@ -10,6 +10,9 @@ interface Props {
 
 const Column = ({ status }: Props) => {
   const tasks = useTaskStore((store) => store.tasks);
+  const setDraggedTask = useTaskStore((state) => state.setDraggedTask);
+  const draggedTaskId = useTaskStore((state) => state.draggedTaskId);
+
   const [isOpen, setIsOpen] = useState(false);
 
   const filteredTasks = useMemo(
@@ -29,7 +32,14 @@ const Column = ({ status }: Props) => {
     ));
 
   return (
-    <div className="column">
+    <div
+      className="column"
+      onDragOver={(e) => e.preventDefault()}
+      onDrop={(e) => {
+        setDraggedTask(null);
+        console.log("draggedTaskId", draggedTaskId);
+      }}
+    >
       <div className="title-wrapper">
         <p>{status}</p>
         <button onClick={() => setIsOpen(true)}>Add</button>

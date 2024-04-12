@@ -12,9 +12,10 @@ interface Props {
 
 const Task = ({ id, title, description, status }: Props) => {
   const deleteTask = useTaskStore((state) => state.deleteTask);
+  const setDraggedTask = useTaskStore((state) => state.setDraggedTask);
 
   return (
-    <div className="task">
+    <div className="task" draggable onDragStart={() => setDraggedTask(id)}>
       <div className="task__title">{title}</div>
       <p>{description}</p>
       <div className="bottom-wrapper">
