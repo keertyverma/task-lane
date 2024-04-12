@@ -13,6 +13,7 @@ export interface ITask {
 interface TaskStore {
   tasks: ITask[];
   addTask: (task: ITask) => void;
+  deleteTask: (taskId: string) => void;
 }
 
 const useTaskStore = create<TaskStore>((set) => ({
@@ -28,6 +29,10 @@ const useTaskStore = create<TaskStore>((set) => ({
         },
         ...state.tasks,
       ],
+    })),
+  deleteTask: (taskId: string) =>
+    set((state) => ({
+      tasks: state.tasks.filter((task) => task.id !== taskId),
     })),
 }));
 

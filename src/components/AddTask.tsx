@@ -32,7 +32,8 @@ const AddTask = ({ status, onAdd }: Props) => {
         <textarea
           value={task.description}
           onChange={(e) => setTask({ ...task, description: e.target.value })}
-          rows={5}
+          rows={3}
+          cols={2}
           placeholder="description..."
         ></textarea>
         <div className="modal_control">

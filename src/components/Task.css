@@ -38,3 +38,12 @@
 .DONE {
   background: var(--COLOR-DONE);
 }
+
+.btn-delete {
+  outline: none;
+  border: 0;
+}
+
+.trash-icon {
+  font-size: 1rem;
+}
