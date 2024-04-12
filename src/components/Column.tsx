@@ -1,5 +1,6 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import useTaskStore, { Status } from "../store";
+import AddTask from "./AddTask";
 import "./Column.css";
 import Task from "./Task";
 
@@ -9,6 +10,7 @@ interface Props {
 
 const Column = ({ status }: Props) => {
   const tasks = useTaskStore((store) => store.tasks);
+  const [isOpen, setIsOpen] = useState(false);
 
   const filteredTasks = useMemo(
     () => tasks.filter((task) => task.status === status),
@@ -28,7 +30,11 @@ const Column = ({ status }: Props) => {
 
   return (
     <div className="column">
-      <p>{status}</p>
+      <div className="title-wrapper">
+        <p>{status}</p>
+        <button onClick={() => setIsOpen(true)}>Add</button>
+      </div>
+      {isOpen && <AddTask status={status} onAdd={() => setIsOpen(false)} />}
       {renderTasks()}
     </div>
   );

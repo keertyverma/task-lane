@@ -3,7 +3,7 @@ import { Status } from "../store";
 import "./Task.css";
 
 interface Props {
-  id: string;
+  id?: string;
   title: string;
   description?: string;
   status: Status;
@@ -12,7 +12,8 @@ interface Props {
 const Task = ({ id, title, description, status }: Props) => {
   return (
     <div className="task">
-      <div>{title}</div>
+      <div className="task__title">{title}</div>
+      <p>{description}</p>
       <div className="bottom-wrapper">
         <div></div>
         <div className={classNames("status", status)}>{status}</div>

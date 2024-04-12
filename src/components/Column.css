@@ -8,3 +8,25 @@
   border-radius: var(--BORDER-RADIUS);
   padding: 0.5rem;
 }
+
+.title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.title-wrapper button {
+  all: unset;
+  font-size: 1.2rem;
+  background: #fff;
+  color: #000;
+  padding: 0.5rem;
+  border-radius: var(--BORDER-RADIUS);
+  height: fit-content;
+  cursor: pointer;
+}
+
+.title-wrapper button:hover {
+  background: var(--COLOR-GRAY-LIGHT);
+}

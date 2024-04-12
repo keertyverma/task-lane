@@ -7,6 +7,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-bottom: 0.5rem;
+  overflow: auto;
+}
+
+.task__title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .bottom-wrapper {
