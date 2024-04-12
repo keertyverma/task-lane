@@ -1,4 +1,3 @@
-import { v4 as uuid } from "uuid";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -27,15 +26,7 @@ const useTaskStore = create<TaskStore>(
       draggedTaskId: null,
       addTask: (task) =>
         set((state) => ({
-          tasks: [
-            {
-              id: uuid(),
-              title: task.title,
-              description: task.description,
-              status: task.status,
-            },
-            ...state.tasks,
-          ],
+          tasks: [task, ...state.tasks],
         })),
       deleteTask: (id) =>
         set((state) => ({

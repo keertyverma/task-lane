@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { v4 as uuid } from "uuid";
 import useTaskStore, { Status } from "../store";
 import "./AddTask.css";
 
@@ -15,7 +16,7 @@ const AddTask = ({ status, onAdd }: Props) => {
   });
 
   const handleClick = () => {
-    addTask({ ...task, status });
+    addTask({ id: uuid(), ...task, status });
     setTask({ title: "", description: "" });
     onAdd();
   };
