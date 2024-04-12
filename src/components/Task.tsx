@@ -1,21 +1,15 @@
 import classNames from "classnames";
+import { Status } from "../store";
 import "./Task.css";
 
-export type Status = "TODO" | "IN_PROGRESS" | "DONE";
-
-interface Task {
-  title: string;
-}
-
 interface Props {
-  task: Task;
+  id: string;
+  title: string;
+  description?: string;
+  status: Status;
 }
 
-const Task = ({ task }: Props) => {
-  const status: Status = "TODO";
-
-  const { title } = task;
-
+const Task = ({ id, title, description, status }: Props) => {
   return (
     <div className="task">
       <div>{title}</div>
