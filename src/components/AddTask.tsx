@@ -35,8 +35,9 @@ const AddTask = ({ status, onAdd }: Props) => {
           rows={5}
           placeholder="description..."
         ></textarea>
-        <div>
+        <div className="modal_control">
           <button onClick={handleClick}>Submit</button>
+          <button onClick={onAdd}>Close</button>
         </div>
       </div>
     </div>
