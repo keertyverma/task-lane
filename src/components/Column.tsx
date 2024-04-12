@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { useMemo, useState } from "react";
 import useTaskStore, { Status } from "../store";
 import AddTask from "./AddTask";
@@ -12,8 +13,10 @@ const Column = ({ status }: Props) => {
   const tasks = useTaskStore((store) => store.tasks);
   const setDraggedTask = useTaskStore((state) => state.setDraggedTask);
   const draggedTaskId = useTaskStore((state) => state.draggedTaskId);
+  const moveTask = useTaskStore((state) => state.moveTask);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isDrop, setIsDrop] = useState(false);
 
   const filteredTasks = useMemo(
     () => tasks.filter((task) => task.status === status),
@@ -33,11 +36,19 @@ const Column = ({ status }: Props) => {
 
   return (
     <div
-      className="column"
-      onDragOver={(e) => e.preventDefault()}
-      onDrop={(e) => {
+      className={classNames("column", { drop: isDrop })}
+      onDragOver={(e) => {
+        setIsDrop(true);
+        e.preventDefault();
+      }}
+      onDragLeave={(e) => {
+        setIsDrop(false);
+        e.preventDefault();
+      }}
+      onDrop={() => {
+        setIsDrop(false);
+        moveTask(draggedTaskId, status);
         setDraggedTask(null);
-        console.log("draggedTaskId", draggedTaskId);
       }}
     >
       <div className="title-wrapper">
