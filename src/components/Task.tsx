@@ -9,7 +9,7 @@ interface Props {
   status: Status;
 }
 
-const Task = ({ id, title, description, status }: Props) => {
+const Task = ({ id, title, description }: Props) => {
   const deleteTask = useTaskStore((state) => state.deleteTask);
   const setDraggedTask = useTaskStore((state) => state.setDraggedTask);
 
