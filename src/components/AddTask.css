@@ -31,3 +31,11 @@
   display: flex;
   gap: 2rem;
 }
+
+.btn-submit {
+  background-color: var(--COLOR-INPROGRESS);
+}
+
+.btn-close {
+  background-color: var(--COLOR-DONE);
+}

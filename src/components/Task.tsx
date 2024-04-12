@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import { FaTrash } from "react-icons/fa";
 import useTaskStore, { Status } from "../store";
 import "./Task.css";
@@ -24,7 +23,6 @@ const Task = ({ id, title, description, status }: Props) => {
             <FaTrash className="trash-icon" />
           </button>
         </div>
-        <div className={classNames("status", status)}>{status}</div>
       </div>
     </div>
   );

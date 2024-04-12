@@ -2,6 +2,23 @@
   background: var(--COLOR-GRAY);
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 2rem;
+}
+
+.columns {
+  display: flex;
   justify-content: center;
   align-items: start;
+  width: 100%;
+}
+
+.btn {
+  border: 0;
+  border-radius: var(--BORDER-RADIUS);
+  outline: 0;
+  padding: 0.5rem 1rem;
+  background: yellow;
+  font-weight: 600;
 }

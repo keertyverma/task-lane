@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
-import useTaskStore, { Status } from "../store";
+import useTaskStore from "../store";
 import "./AddTask.css";
 
 interface Props {
-  status: Status;
   onAdd: () => void;
 }
 
-const AddTask = ({ status, onAdd }: Props) => {
+const AddTask = ({ onAdd }: Props) => {
   const addTask = useTaskStore((store) => store.addTask);
   const [task, setTask] = useState<{ title: string; description: string }>({
     title: "",
@@ -16,7 +15,7 @@ const AddTask = ({ status, onAdd }: Props) => {
   });
 
   const handleClick = () => {
-    addTask({ id: uuid(), ...task, status });
+    addTask({ id: uuid(), ...task, status: "TODO" });
     setTask({ title: "", description: "" });
     onAdd();
   };
@@ -38,8 +37,12 @@ const AddTask = ({ status, onAdd }: Props) => {
           placeholder="description..."
         ></textarea>
         <div className="modal_control">
-          <button onClick={handleClick}>Submit</button>
-          <button onClick={onAdd}>Close</button>
+          <button className="btn btn-submit" onClick={handleClick}>
+            Submit
+          </button>
+          <button className="btn btn-close" onClick={onAdd}>
+            Close
+          </button>
         </div>
       </div>
     </div>

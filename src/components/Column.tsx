@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import { useMemo, useState } from "react";
 import useTaskStore, { Status } from "../store";
-import AddTask from "./AddTask";
 import "./Column.css";
 import Task from "./Task";
 
@@ -15,7 +14,6 @@ const Column = ({ status }: Props) => {
   const draggedTaskId = useTaskStore((state) => state.draggedTaskId);
   const moveTask = useTaskStore((state) => state.moveTask);
 
-  const [isOpen, setIsOpen] = useState(false);
   const [isDrop, setIsDrop] = useState(false);
 
   const filteredTasks = useMemo(
@@ -33,6 +31,12 @@ const Column = ({ status }: Props) => {
         status={task.status}
       />
     ));
+
+  const statusMap = {
+    TODO: "Todo",
+    IN_PROGRESS: "In Progress",
+    DONE: "Done",
+  };
 
   return (
     <div
@@ -52,10 +56,9 @@ const Column = ({ status }: Props) => {
       }}
     >
       <div className="title-wrapper">
-        <p>{status}</p>
-        <button onClick={() => setIsOpen(true)}>Add</button>
+        <h1 className="title-heading">{statusMap[status]}</h1>
       </div>
-      {isOpen && <AddTask status={status} onAdd={() => setIsOpen(false)} />}
+
       {renderTasks()}
     </div>
   );
